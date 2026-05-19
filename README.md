@@ -23,5 +23,5 @@ Pearl Landing Timer is a mod that shows a configurable HUD countdown for your la
 
 ## Disclaimer
 
-This plugin is licensed under the **[MIT License](https://github.com/oneauraaa/pearl-landing-timer/blob/main/LICENSE)**.
+This mod is licensed under the **[MIT License](https://github.com/oneauraaa/pearl-landing-timer/blob/main/LICENSE)**.
 </div>
