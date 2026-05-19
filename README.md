@@ -18,7 +18,7 @@ Pearl Landing Timer is a mod that shows a configurable HUD countdown for your la
 
 | Platform | Supported Versions |
 | :--- | :--- |
-| Fabric | 1.21.11 |
+| Fabric | 1.21.x |
 ---
 
 ## Disclaimer
