@@ -1,31 +1,34 @@
 {
-  "schemaVersion": 1,
-  "id": "pearl-landing-timer",
-  "version": "${version}",
-  "name": "Pearl Landing Timer",
-  "description": "Shows when thrown ender pearls are predicted to land.",
-  "authors": [
-    "Selim"
-  ],
-  "contact": {},
-  "license": "MIT",
-  "environment": "client",
-  "entrypoints": {
-    "client": [
-      "com.selim.pearllandingtimer.PearlLandingTimerClient"
-    ],
-    "modmenu": [
-      "com.selim.pearllandingtimer.PearlLandingTimerModMenu"
-    ]
-  },
-  "depends": {
-    "fabricloader": ">=0.19.2",
-    "minecraft": "1.21.11",
-    "java": ">=21",
-    "fabric-api": "*",
-    "cloth-config": ">=21.11.153"
-  },
-  "suggests": {
-    "modmenu": ">=17.0.0"
-  }
+	"schemaVersion": 1,
+	"id": "pearl-landing-timer",
+	"version": "${version}",
+	"name": "Pearl Landing Timer",
+	"description": "Shows a configurable HUD countdown for your latest thrown ender pearl.",
+	"authors": [
+		"oneaura"
+	],
+	"contact": {
+		"homepage": "https://github.com/oneauraaa/pearl-landing-timer",
+		"sources": "https://github.com/oneauraaa/pearl-landing-timer",
+		"issues": "https://github.com/oneauraaa/pearl-landing-timer/issues"
+	},
+	"license": "MIT",
+	"icon": "assets/pearl-landing-timer/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"oneaura.pearllandingtimer.PearlLandingTimerClient"
+		],
+		"modmenu": [
+			"oneaura.pearllandingtimer.config.PearlLandingTimerModMenu"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": ">=1.21 <=1.21.11",
+		"java": ">=21",
+		"fabric-api": "*",
+		"cloth-config": ">=21.0.0",
+		"modmenu": ">=11.0.0"
+	}
 }
