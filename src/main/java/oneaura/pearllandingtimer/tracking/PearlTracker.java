@@ -54,7 +54,7 @@ public class PearlTracker {
 		}
 
 		trackedPearlId = latestPearl.getId();
-		predictedTicks = PearlPrediction.predictTicksUntilLanding(latestPearl);
+		predictedTicks = PearlPrediction.predictTicksUntilLanding(client.world, latestPearl.getBoundingBox().getCenter(), latestPearl.getVelocity(), latestPearl);
 	}
 
 	public boolean hasPrediction() {

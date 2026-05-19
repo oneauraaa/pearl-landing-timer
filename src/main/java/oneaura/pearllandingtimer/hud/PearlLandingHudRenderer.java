@@ -1,6 +1,6 @@
 package oneaura.pearllandingtimer.hud;
 
-import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElement;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -13,7 +13,7 @@ import oneaura.pearllandingtimer.tracking.PearlTracker;
 
 import java.util.Locale;
 
-public class PearlLandingHudRenderer implements HudElement {
+public class PearlLandingHudRenderer implements HudRenderCallback {
 	private static final ItemStack PEARL_STACK = new ItemStack(Items.ENDER_PEARL);
 	private static final int PADDING_X = 6;
 	private static final int PADDING_Y = 5;
@@ -31,12 +31,12 @@ public class PearlLandingHudRenderer implements HudElement {
 	}
 
 	@Override
-	public void render(DrawContext context, RenderTickCounter tickCounter) {
+	public void onHudRender(DrawContext context, RenderTickCounter tickCounter) {
 		if (!config.hudEnabled || !pearlTracker.hasPrediction()) {
 			return;
 		}
 
-		String text = formatTimer(pearlTracker.getPredictedTicks(), tickCounter.getTickProgress(false));
+		String text = formatTimer(pearlTracker.getPredictedTicks(), 0.0F);
 		renderPanel(context, config, text);
 	}
 

@@ -1,7 +1,6 @@
 package oneaura.pearllandingtimer.tracking;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -17,10 +16,6 @@ public final class PearlPrediction {
 	private static final double WATER_DRAG = 0.8D;
 
 	private PearlPrediction() {
-	}
-
-	public static int predictTicksUntilLanding(EnderPearlEntity pearl) {
-		return predictTicksUntilLanding(pearl.getEntityWorld(), pearl.getBoundingBox().getCenter(), pearl.getVelocity(), pearl);
 	}
 
 	public static int predictTicksUntilLanding(World world, Vec3d position, Vec3d velocity, Entity raycastEntity) {
@@ -55,6 +50,6 @@ public final class PearlPrediction {
 	}
 
 	public static boolean isOwnedBy(Entity entity, Entity owner) {
-		return entity instanceof EnderPearlEntity pearl && owner.equals(pearl.getOwner());
+		return entity instanceof net.minecraft.entity.projectile.thrown.EnderPearlEntity pearl && owner.equals(pearl.getOwner());
 	}
 }

@@ -1,6 +1,5 @@
 package oneaura.pearllandingtimer.screen;
 
-import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -14,9 +13,6 @@ public class HudPositionScreen extends Screen {
 
 	private final Screen parent;
 	private final PearlLandingTimerConfig config;
-	private boolean dragging;
-	private int dragOffsetX;
-	private int dragOffsetY;
 
 	public HudPositionScreen(Screen parent) {
 		super(Text.translatable("text.pearl-landing-timer.position.title"));
@@ -26,6 +22,19 @@ public class HudPositionScreen extends Screen {
 
 	@Override
 	protected void init() {
+		int buttonY = height - 82;
+		addDrawableChild(ButtonWidget.builder(Text.literal("^"), button -> moveHud(0, -10))
+				.dimensions(width / 2 - 10, buttonY, 20, 20)
+				.build());
+		addDrawableChild(ButtonWidget.builder(Text.literal("<"), button -> moveHud(-10, 0))
+				.dimensions(width / 2 - 34, buttonY + 24, 20, 20)
+				.build());
+		addDrawableChild(ButtonWidget.builder(Text.literal(">"), button -> moveHud(10, 0))
+				.dimensions(width / 2 + 14, buttonY + 24, 20, 20)
+				.build());
+		addDrawableChild(ButtonWidget.builder(Text.literal("v"), button -> moveHud(0, 10))
+				.dimensions(width / 2 - 10, buttonY + 48, 20, 20)
+				.build());
 		addDrawableChild(ButtonWidget.builder(Text.translatable("gui.done"), button -> close())
 				.dimensions(width / 2 - 75, height - 32, 150, 20)
 				.build());
@@ -46,48 +55,13 @@ public class HudPositionScreen extends Screen {
 		super.render(context, mouseX, mouseY, delta);
 	}
 
-	@Override
-	public boolean mouseClicked(Click click, boolean doubled) {
+	private void moveHud(int deltaX, int deltaY) {
 		int hudWidth = PearlLandingHudRenderer.getPanelWidth(textRenderer, config, PREVIEW_TEXT);
 		int hudHeight = PearlLandingHudRenderer.getPanelHeight();
 		int hudX = config.getHudX(hudWidth, width);
 		int hudY = config.getHudY(hudHeight, height);
-
-		if (click.button() == 0
-				&& click.x() >= hudX
-				&& click.x() <= hudX + hudWidth
-				&& click.y() >= hudY
-				&& click.y() <= hudY + hudHeight) {
-			dragging = true;
-			dragOffsetX = (int) click.x() - hudX;
-			dragOffsetY = (int) click.y() - hudY;
-			return true;
-		}
-
-		return super.mouseClicked(click, doubled);
-	}
-
-	@Override
-	public boolean mouseDragged(Click click, double deltaX, double deltaY) {
-		if (dragging) {
-			int hudWidth = PearlLandingHudRenderer.getPanelWidth(textRenderer, config, PREVIEW_TEXT);
-			int hudHeight = PearlLandingHudRenderer.getPanelHeight();
-			config.setHudPosition((int) click.x() - dragOffsetX, (int) click.y() - dragOffsetY, hudWidth, hudHeight, width, height);
-			return true;
-		}
-
-		return super.mouseDragged(click, deltaX, deltaY);
-	}
-
-	@Override
-	public boolean mouseReleased(Click click) {
-		if (dragging && click.button() == 0) {
-			dragging = false;
-			config.save();
-			return true;
-		}
-
-		return super.mouseReleased(click);
+		config.setHudPosition(hudX + deltaX, hudY + deltaY, hudWidth, hudHeight, width, height);
+		config.save();
 	}
 
 	@Override
